@@ -3,15 +3,23 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Hello from './Hello'
 
 export default function App() {
-  const [inputValue, setInputValue] = useState('Hi')
+  const [inputValue, setInputValue] = useState('')
+
+  let tip = 0.00
+  if(inputValue) {
+    tip = parseFloat(inputValue) * .2
+    tip = (Math.round(tip * 100) /100).toFixed(2)
+  }
 
   return (
     <View style={styles.container}>
-      <Text>{inputValue}</Text>
+      <Text>${tip}</Text>
       <TextInput
         value={inputValue}
         onChangeText={text => setInputValue(text)}
         style={styles.input}
+        keyboardType='numeric'
+        placeholder='0.00'
       />
     </View>
   );
