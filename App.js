@@ -1,11 +1,18 @@
-import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Hello from './Hello'
 
 export default function App() {
+  const [inputValue, setInputValue] = useState('Hi')
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} />
+      <Text>{inputValue}</Text>
+      <TextInput
+        value={inputValue}
+        onChangeText={text => setInputValue(text)}
+        style={styles.input}
+      />
     </View>
   );
 }
