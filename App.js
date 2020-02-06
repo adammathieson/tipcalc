@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { Container, Content, Header, Left, Body, Right, Title } from 'native-base'
 import Hello from './Hello'
 
 export default function App() {
@@ -21,7 +22,16 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <Container>
+      <Header>
+          <Left />
+          <Body>
+            <Title>Header1</Title>
+          </Body>
+          <Right />
+        </Header>
+      <Content padder>
+        <View style={styles.container}>
       <View style={styles.buttonGroup}>
         <Button
           title='10%'
@@ -53,6 +63,10 @@ export default function App() {
       />
 
     </View>
+      </Content>
+      
+    </Container>
+    
   );
 }
 
@@ -61,8 +75,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
   },
   input: {
     height: 40,
