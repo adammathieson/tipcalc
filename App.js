@@ -10,23 +10,18 @@ export default function App() {
   const [tipPercent, setTipPercent] = useState('')
   const [isReady, setIsReady] = useState(false)
 
-
-useEffect(() => {
-      Font.loadAsync({
-        Roboto: require('native-base/Fonts/Roboto.ttf'),
-        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        ...Ionicons.font,
-    });
-    setIsReady(true);
+  useEffect(() => {
+    // Weird hack needed for android simulator https://docs.nativebase.io/docs/GetStarted.html
+      async function dumbHack() {
+        await Font.loadAsync({
+          Roboto: require('native-base/Fonts/Roboto.ttf'),
+          Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+          ...Ionicons.font,
+        });
+        setIsReady(true)
+      }
+      dumbHack()
 }, [])
-  // async componentDidMount() {
-  //   await Font.loadAsync({
-  //     Roboto: require('native-base/Fonts/Roboto.ttf'),
-  //     Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-  //     ...Ionicons.font,
-  //   });
-  //   this.setState({ isReady: true });
-  // }
 
   const updateCustomTip = customTip => {
     if (customTip) {
@@ -51,7 +46,7 @@ useEffect(() => {
       <Header>
           <Left />
           <Body>
-            <Title>Header1</Title>
+            <Title>Header</Title>
           </Body>
           <Right />
         </Header>
