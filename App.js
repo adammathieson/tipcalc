@@ -1,11 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { Container, Content, Header, Left, Body, Right, Title } from 'native-base'
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 import Hello from './Hello'
 
 export default function App() {
   const [inputValue, setInputValue] = useState('')
   const [tipPercent, setTipPercent] = useState('')
+  const [isReady, setIsReady] = useState(false)
+
+
+useEffect(() => {
+      Font.loadAsync({
+        Roboto: require('native-base/Fonts/Roboto.ttf'),
+        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+        ...Ionicons.font,
+    });
+    setIsReady(true);
+}, [])
+  // async componentDidMount() {
+  //   await Font.loadAsync({
+  //     Roboto: require('native-base/Fonts/Roboto.ttf'),
+  //     Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+  //     ...Ionicons.font,
+  //   });
+  //   this.setState({ isReady: true });
+  // }
 
   const updateCustomTip = customTip => {
     if (customTip) {
@@ -19,6 +40,10 @@ export default function App() {
   if (inputValue) {
     tip = parseFloat(inputValue) * tipPercent
     tip = (Math.round(tip * 100) / 100).toFixed(2)
+  }
+
+  if (!isReady) {
+    return <Text>Loading...</Text>
   }
 
   return (
